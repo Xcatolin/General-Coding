@@ -1,2 +1,16 @@
-# General-Coding
-A repository intended to store some stuff i developed in order to practice coding.
+<pre>
+   ___                          _ 
+  / _ \___ _ __   ___ _ __ __ _| |
+ / /_\/ _ \ '_ \ / _ \ '__/ _` | |
+/ /_\\  __/ | | |  __/ | | (_| | |
+\____/\___|_| |_|\___|_|  \__,_|_|
+                                  
+   ___          _ _               
+  / __\___   __| (_)_ __   __ _   
+ / /  / _ \ / _` | | '_ \ / _` |  
+/ /__| (_) | (_| | | | | | (_| |  
+\____/\___/ \__,_|_|_| |_|\__, |  
+                          |___/   
+</pre>
+
+#### A repository intended to store some stuff i developed in order to practice coding.
