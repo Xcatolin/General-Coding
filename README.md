@@ -13,4 +13,4 @@
                           |___/   
 </pre>
 
-#### A repository intended to store some stuff i developed in order to practice coding.
+#### A repository intended to store some coding exercises, notes and stuff
