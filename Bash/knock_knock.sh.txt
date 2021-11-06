@@ -1,0 +1,10 @@
+#!/bin/bash
+
+host=$1
+
+[ $# -eq 0 ] && { echo "Usage: ./knock <host> <port1> <port2> <port3>"; exit 1; }
+
+for arg in "$@"
+	do
+		nmap -Pn --host-timeout 100 --max-retries 0 -p $arg $host
+	done
